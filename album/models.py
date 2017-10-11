@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
+from django.core.urlresolvers import reverse
 
 from django.db import models
 
@@ -20,6 +23,15 @@ class Photo(models.Model):
     pub_date = models.DateField(auto_now_add=True)
     favorite = models.BooleanField(default=False)
     comment = models.CharField(max_length=200, blank=True)
-
+    def get_absolute_url(self):
+        return reverse('photo-list')
+    
     def __unicode__(self):
         return self.title
+
+@receiver(post_delete, sender=Photo)
+def photo_delete(sender, instance, **kwargs):
+    """ Borra los ficheros de las fotos que se eliminan. """
+    instance.photo.delete(False)
+
+
