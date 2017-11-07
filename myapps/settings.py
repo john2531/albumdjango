@@ -37,13 +37,17 @@ INSTALLED_APPS = [
     'django_adminlte_theme',
 
     'django.contrib.admin',
+    'registration',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'album',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -128,3 +132,6 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'media/')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'media'),
 )
+
+ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
+REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.
