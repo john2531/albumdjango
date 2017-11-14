@@ -7,6 +7,9 @@ from django.core.urlresolvers import reverse_lazy
 from django.views.generic.edit import UpdateView, CreateView, DeleteView 
 from django.contrib.auth.decorators import login_required
 
+from rest_framework import viewsets
+from album.serializers import CategorySerializer, PhotoSerializer 
+
 from django.shortcuts import render
 
 # Create your views here.
@@ -54,3 +57,15 @@ class PhotoDelete(LoginRequiredMixin,DeleteView):
     model = Photo
     success_url = reverse_lazy('photo-list')
     
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+class PhotoViewSet(viewsets.ModelViewSet):
+    queryset = Photo.objects.all()
+    serializer_class = PhotoSerializer
+
+
+
+

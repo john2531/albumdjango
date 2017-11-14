@@ -12,3 +12,4 @@ sys.setdefaultencoding('utf-8')
 admin.site.register(Category)
 admin.site.register(Photo)
 
+

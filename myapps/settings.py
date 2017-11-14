@@ -44,13 +44,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'social_django',
     'crispy_forms',
+    'rest_framework',
+
     'album',
 ]
 
 LOGIN_REDIRECT_URL = "/album"
+LOGIN_URL = 'login'
 LOGOUT_URL = "/accounts/logout"
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+SITE_ID = 1
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -60,6 +69,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',
+
+
 ]
 
 ROOT_URLCONF = 'myapps.urls'
@@ -75,12 +88,31 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+            
+                'social_django.context_processors.backends', 
+                'social_django.context_processors.login_redirect',
+            
+            
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'myapps.wsgi.application'
+
+AUTHENTICATION_BACKENDS = (
+        'social_core.backends.facebook.FacebookAppOAuth2',
+        'social_core.backends.facebook.FacebookOAuth2',
+        'social_core.backends.twitter.TwitterOAuth',
+
+
+        'django.contrib.auth.backends.ModelBackend',
+)
+
+
+
+
+
 
 
 # Database
@@ -138,3 +170,14 @@ STATICFILES_DIRS = (
 
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window; you may, of course, use a different value.
 REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.
+
+# EMAIL SETTINGS
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = "587"
+EMAIL_HOST_USER = "umarianaframeworks@gmail.com"
+EMAIL_HOST_PASSWORD = "ingsis601"
+EMAIL_USE_TLS = True
+
+
+SOCIAL_AUTH_TWITTER_KEY = ''
+SOCIAL_AUTH_TWITTER_SECRET = ''
